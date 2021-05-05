@@ -23,6 +23,9 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: "2.7"
+      - name: Set up Rust nightly
+        run: |
+          rustup component add clippy
       - name: Set up Bundler
         run: |
           gem install bundler
@@ -31,13 +34,6 @@ jobs:
       - name: Set up Prettier
         run: |
           npm install prettier
-      - name: Set up Rust nightly
-        run: |
-          rm rust-toolchain
-          rustup self update
-          rustup toolchain install nightly --component rustfmt clippy
-          rustup default nightly
-          rustup target add aarch64-unknown-none-softfloat
       - name: Setup misspell
         run: |
           curl -L -o ./install-misspell.sh https://git.io/misspell
